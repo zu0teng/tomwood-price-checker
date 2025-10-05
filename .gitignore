@@ -1,0 +1,5 @@
+# 除外したいファイル・ディレクトリ
+.env
+__pycache__/
+run.log
+price_history.json

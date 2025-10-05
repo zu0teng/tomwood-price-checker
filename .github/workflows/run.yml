@@ -1,0 +1,32 @@
+name: Daily Price Check
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # UTC 0:00 = JST 9:00
+  workflow_dispatch:      # 手動でも実行可能
+
+jobs:
+  check_price:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install chromium
+
+      - name: Run price checker
+        env:
+          GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}
+          GMAIL_RECIPIENT: ${{ secrets.GMAIL_RECIPIENT }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          python main.py
