@@ -35,7 +35,7 @@ logger.addHandler(console_handler)
 
 urls = [
     "https://www.tomwoodproject.com/jp_ja/product/ice-huggie/",
-    "https://www.tomwoodproject.com/jp_ja/product/cushion-open/"
+    "https://www.tomwoodproject.com/jp_ja/product/robin-bracelet/"
 ]
 
 def main():
